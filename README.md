@@ -30,7 +30,7 @@ Install on Heroku
 
     $ heroku config:set GDAL_LIBRARY_PATH='/app/.geodjango/gdal/lib/libgdal.so'
     $ heroku config:set GEOS_LIBRARY_PATH='/app/.geodjango/geos/lib/libgeos_c.so'
-    $ heroku config:set GDAL_LIBRARY_PATH='TRUE'
+    $ heroku config:set PRODUCTION='TRUE'
 
 
 Install locally
