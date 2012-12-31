@@ -1,0 +1,6 @@
+Django==1.4.3
+OSR==0.0.1
+eyeD3==0.7.1
+psycopg2==2.4.5
+pyglet==1.1.4
+wsgiref==0.1.2

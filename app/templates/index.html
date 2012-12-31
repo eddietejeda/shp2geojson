@@ -1,0 +1,33 @@
+<html>
+<body>
+<div style="text-align: center; font-size: 150%">
+
+	<h2> Upload SHAPE file</h2>
+	<form action="/" enctype="multipart/form-data" method="post">
+
+
+		<p>
+			<input type="file" name="file" size="40">
+		</p>
+
+		<div>
+			<input type="submit" value="Upload">
+		</div>
+	</form>
+
+
+
+	<h2>Command Line</h2>
+	<code>curl -i -X POST -F file=@shapezipfile.zip  http://shp2geojson.herokuapp.com/</code>
+
+
+<!-- 	<h2> Ruby </h2>
+
+
+	<h2> Python </h2>
+ -->
+
+
+</div>
+</body>
+</html>
