@@ -3,8 +3,6 @@ shp2geojson
 
 Most online map services use longitude/latitude coordinates with WGS84 projection. Local governments most often provide ESRI Shapefiles using all kinds of funky projections. I want to be able to take any Shapefile with any projection and covert it to GeoJSON using Lat/Long and work with that. You can easily install GDAL/OGR to change the filetypes, but I wanted to create a service that was ready and available for anyone to use at anytime. Setting up GDAL/OGR on Heroku can be a pain and now you don't have to.
 
-So I created a simple webservice that takes a Shapefile (zipped) and returns a GeoJSON file. I want this service to have a long life and future applications to be dependent on it so I wanted it to be on Heroku.
-
 
 Install on Heroku
 -----
