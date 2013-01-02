@@ -54,7 +54,9 @@ APP_ROOT = os.path.join(BASE_PATH, "app")
 
 DATA_ROOT = os.path.join(BASE_PATH, "data")
 
-APP_STATIC = os.path.join(BASE_PATH, "static")
+BASE_STATIC = os.path.join(BASE_PATH, "static")
+
+APP_STATIC = os.path.join(APP_ROOT, "static")
 
 MEDIA_ROOT = ''
 
@@ -67,7 +69,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = BASE_STATIC
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -78,6 +80,7 @@ STATICFILES_DIRS = (
   # Put strings here, like "/home/html/static" or "C:/www/django/static".
   # Always use forward slashes, even on Windows.
   # Don't forget to use absolute paths, not relative paths.
+  APP_STATIC
 )
 
 # List of finder classes that know how to find static files in
