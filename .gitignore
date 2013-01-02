@@ -7,6 +7,6 @@ lib
 *.log
 *.pot
 local_settings.py
-app/data/
-app/static/*.geojson
-app/app/static/*.geojson
+shp2geojson/data/
+shp2geojson/static/*.geojson
+shp2geojson/app/static/*.geojson

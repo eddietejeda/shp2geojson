@@ -1,1 +1,1 @@
-web: python app/manage.py runserver 0.0.0.0:$PORT --noreload
+web: python shp2geojson/manage.py runserver 0.0.0.0:$PORT --noreload
