@@ -5,6 +5,7 @@ import tempfile
 import shutil
 import pprint
 import os.path
+import urlparse
 
 from django import forms
 from django.http import HttpResponse
@@ -15,6 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.conf import settings
+
 
 
 # http://geoinformaticstutorial.blogspot.com/2012/10/reprojecting-shapefile-with-gdalogr-and.html
@@ -28,6 +30,7 @@ def upload_file(request):
     form = UploadFileForm(request.POST, request.FILES)
 
     uploaded_filename = request.FILES['file'].name
+
     (filename, extension) = os.path.splitext(uploaded_filename)   
 
     if extension == ".zip":
@@ -37,7 +40,7 @@ def upload_file(request):
 
       unzip(zipfile_shp)
 
-      fro = os.path.join(settings.DATA_ROOT, filename + '.shp')
+      fro = os.path.join(settings.DATA_ROOT, filename, filename + '.shp')
       to = os.path.join(settings.APP_STATIC, filename + '.geojson')
 
       reproject_shp_file_covert_to_geojson( fro, to )
@@ -79,21 +82,41 @@ def reproject_shp_file_covert_to_geojson( fro, to):
     response = os.popen(cmd,"r")
 
 
-def unzip( fullpath ):
-  dirname = os.path.dirname(fullpath)
-  
-  # Get a real Python file handle on the uploaded file
-  fullpathhandle = open(fullpath, 'r') 
 
-  # Unzip the file, creating subdirectories as needed
-  zfobj = zipfile.ZipFile(fullpathhandle)
-  for name in zfobj.namelist():
-    if name.endswith('/'):
-      try: # Don't try to create a directory if exists
-        os.mkdir(os.path.join(dirname, name))
-      except:
-        pass
-    else:
-      outfile = open(os.path.join(dirname, name), 'wb')
-      outfile.write(zfobj.read(name))
-      outfile.close()
+
+def process_url(url, keep_params):
+  parsed= urlparse.urlsplit(url)
+  filtered_query= '&'.join(
+    qry_item
+    for qry_item in parsed.query.split('&')
+    if qry_item.startswith(keep_params))
+  return urlparse.urlunsplit(parsed[:3] + (filtered_query,) + parsed[4:])
+
+
+def unzip( fullpath ):
+  basename = os.path.basename(fullpath)
+  (filename, extension) = os.path.splitext(basename)   
+  dirname = os.path.join( os.path.dirname(fullpath),  filename)
+
+  try: # Don't try to create a directory if exists
+    os.mkdir(dirname)
+
+    # Get a real Python file handle on the uploaded file
+    fullpathhandle = open(fullpath, 'r') 
+
+    # Unzip the file, creating subdirectories as needed
+    zfobj = zipfile.ZipFile(fullpathhandle)
+    for name in zfobj.namelist():
+      if name.endswith('/'):
+        try: # Don't try to create a directory if exists
+          os.mkdir(os.path.join(dirname, name))
+        except:
+          pass
+      else:
+        outfile = open(os.path.join(dirname, name), 'wb')
+        outfile.write(zfobj.read(name))
+        outfile.close()
+
+  except:
+    pass
+

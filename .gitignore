@@ -7,12 +7,5 @@ lib
 *.log
 *.pot
 local_settings.py
-app/data/*.zip
-app/data/*.shp
-app/data/*.shx
-app/data/*.shp.xml
-app/data/*.sbx
-app/data/*.sbn
-app/data/*.prj
-app/data/*.dbf
+app/data/
 app/static/*.geojson
