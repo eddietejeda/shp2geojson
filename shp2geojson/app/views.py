@@ -77,7 +77,7 @@ def reproject_shp_file_covert_to_geojson( fro, to):
     if 'PRODUCTION' in os.environ:
       ogr2ogr_path = '/app/.geodjango/gdal/bin/'
 
-    cmd=ogr2ogr_path + 'ogr2ogr -overwrite -F "GeoJSON" -t_srs EPSG:4326 '+to+' ' + fro
+    cmd=ogr2ogr_path + 'ogr2ogr -overwrite -F "GeoJSON" -t_srs EPSG:900913 '+to+' ' + fro
     print cmd
     response = os.popen(cmd,"r")
 
