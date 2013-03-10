@@ -78,7 +78,7 @@ class UploadFileForm(forms.Form):
   file  = forms.FileField()
 
 
-def reproject_shp_file_covert_to_geojson( fro, to, projection = 'EPSG:900913'):
+def reproject_shp_file_covert_to_geojson( fro, to, projection = 'EPSG:3785'):
 
   if(os.path.isfile(to)):
     print 'Using cached version of ' + to    
